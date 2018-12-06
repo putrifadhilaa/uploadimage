@@ -10,12 +10,6 @@ namespace UploadImage.Controllers
 {
     public class ImageController : Controller
     {
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-       
         [HttpGet]
         public ActionResult Add()
         {
