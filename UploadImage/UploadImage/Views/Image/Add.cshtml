@@ -32,16 +32,33 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" onclick="return validateData();" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn pull-right hidden-sm-down btn-success mdi mdi-plus-circle" })
 </div>
 
-@section Scripts {
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+}*@
+
+@section scripts{
+<script src="~/Content/Admin/assets/plugins/sweetalert/sweetalert.min.js"></script>
+<link href="~/Content/Admin/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+    <script type="text/javascript">
+
+    function validateData() {
+
+        if ($("#Title").val() == "") {
+            swal("Insert your file !");
+            return false;
+        } else {
+            return true;
+        }
+    }
+    </script>
 }

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<UploadImage.Models.Image>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="col-md-12 col-10 align-self-center">
+    @Html.ActionLink("Upload File", "Add", "", new { @class = "btn pull-right hidden-sm-down btn-success mdi mdi-plus-circle" })
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th> Action </th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.ActionLink(" View ", "View", new { id = item.ImageID }) |
+                <button onclick='check(@item.ImageID)'>@Html.ActionLink("Delete", "Delete", new { id = item.ImageID })</button> 
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+@section scripts{
+    <script src="~/Content/Admin/assets/plugins/sweetalert/sweetalert.min.js"></script>
+    <link href="~/Content/Admin/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+    <script>
+        function check(ImageID) {
+            swal({
+                title: "Are you sure ?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }, function () {
+                $.ajax({
+                    url: "/Image/Index/",
+                    data: {
+                        'id': ImageID
+                    },
+                    type: "Post",
+                    success: function (response) {
+                        swal({
+                            title: "Deleted!",
+                            text: "That data has been soft delete!",
+                            type: "success"
+                        },
+                        function () {
+                            window.location.href = '/Image/Index/';
+                            //settimeout(function(){
+                            //    location.reload();
+                            //}, 1200 );
+                        });
+                    },
+                    error: function (response) {
+                        swal("Oops", "We couldn't connect to the server!", "error");
+                    }
+                });
+            });
+        }
+    </script>
+}

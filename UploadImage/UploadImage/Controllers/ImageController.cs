@@ -10,6 +10,16 @@ namespace UploadImage.Controllers
 {
     public class ImageController : Controller
     {
+        public ActionResult Index()
+        {
+            List<Image> imageModel = new List<Image>();
+            using (DbModels db = new DbModels())
+            {
+                imageModel = db.Images.ToList();
+            }
+            return View(imageModel);
+        }
+
         [HttpGet]
         public ActionResult Add()
         {
@@ -31,7 +41,7 @@ namespace UploadImage.Controllers
                 db.SaveChanges();
             }
             ModelState.Clear();
-                return View();
+            return View();
         }
 
         [HttpGet]
@@ -41,8 +51,21 @@ namespace UploadImage.Controllers
             using (DbModels db = new DbModels())
             {
                 imageModel = db.Images.Where(x => x.ImageID == id).FirstOrDefault();
+               
             }
-            return View(imageModel);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            Image imageModel = new Image();
+            using (DbModels db = new DbModels())
+            {
+                db.Images.Remove(imageModel);
+                db.SaveChanges(); 
+            }
+                return RedirectToAction("Index");
         }
     }
 }
