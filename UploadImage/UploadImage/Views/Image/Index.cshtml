@@ -24,9 +24,9 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.ActionLink(" View ", "View", new { id = item.ImageID }) |
-                <button onclick='check(@item.ImageID)'>@Html.ActionLink("Delete", "Delete", new { id = item.ImageID })</button> 
-            </td>
+                @Html.ActionLink("View", "View", new { id = item.ImageID }) |
+                <button onclick='check(@item.ImageID)'>Delete</button>
+</td>
         </tr>
     }
 
@@ -48,12 +48,11 @@
                 confirmButtonText: "Yes, delete it!",
                 closeOnConfirm: false
             }, function () {
+                debugger;
                 $.ajax({
-                    url: "/Image/Index/",
-                    data: {
-                        'id': ImageID
-                    },
+                    url: "/Image/Delete/" + ImageID,
                     type: "Post",
+                    dataType: 'json',
                     success: function (response) {
                         swal({
                             title: "Deleted!",

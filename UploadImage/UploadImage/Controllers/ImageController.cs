@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -53,19 +54,19 @@ namespace UploadImage.Controllers
                 imageModel = db.Images.Where(x => x.ImageID == id).FirstOrDefault();
                
             }
-            return View();
+            return View(imageModel);
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        [ValidateAntiForgeryToken]
+        public JsonResult Delete(int id)
         {
-            Image imageModel = new Image();
-            using (DbModels db = new DbModels())
-            {
-                db.Images.Remove(imageModel);
-                db.SaveChanges(); 
-            }
-                return RedirectToAction("Index");
+            DbModels db = new DbModels();
+            var getdata = db.Images.Find(id);
+            //string path = getdata.ImagePath;
+            db.Entry(getdata).State = EntityState.Deleted;
+            db.SaveChanges();
+            return Json(getdata, JsonRequestBehavior.AllowGet);
         }
     }
 }
