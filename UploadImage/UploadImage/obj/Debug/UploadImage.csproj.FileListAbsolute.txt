@@ -133,5 +133,6 @@ C:\Users\Fadhila Putri\Documents\github\uploadimage\UploadImage\UploadImage\bin\
 C:\Users\Fadhila Putri\Documents\github\uploadimage\UploadImage\UploadImage\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Fadhila Putri\Documents\github\uploadimage\UploadImage\UploadImage\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Fadhila Putri\Documents\github\uploadimage\UploadImage\UploadImage\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Fadhila Putri\Documents\github\uploadimage\UploadImage\UploadImage\obj\Debug\UploadImage.csprojResolveAssemblyReference.cache
 C:\Users\Fadhila Putri\Documents\github\uploadimage\UploadImage\UploadImage\obj\Debug\UploadImage.dll
 C:\Users\Fadhila Putri\Documents\github\uploadimage\UploadImage\UploadImage\obj\Debug\UploadImage.pdb

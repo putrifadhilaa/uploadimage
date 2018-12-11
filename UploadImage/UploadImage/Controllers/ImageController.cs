@@ -52,21 +52,20 @@ namespace UploadImage.Controllers
             using (DbModels db = new DbModels())
             {
                 imageModel = db.Images.Where(x => x.ImageID == id).FirstOrDefault();
-               
             }
             return View(imageModel);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult Delete(int id)
+        public ActionResult Delete(int id)
         {
             DbModels db = new DbModels();
             var getdata = db.Images.Find(id);
+            db.Images.Remove(getdata);
             //string path = getdata.ImagePath;
-            db.Entry(getdata).State = EntityState.Deleted;
+            //db.Entry(getdata).State = EntityState.Deleted;
             db.SaveChanges();
-            return Json(getdata, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Index");
         }
     }
 }
